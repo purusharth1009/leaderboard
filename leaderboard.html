@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leaderboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+        #score-box {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+        button {
+            font-size: 16px;
+            padding: 5px 10px;
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Leaderboard</h1>
+
+<div id="score-box"></div>
+
+<button onclick="addToScore(1)">1</button>
+<button onclick="addToScore(2)">2</button>
+<button onclick="addToScore(3)">3</button>
+<button onclick="addToScore(4)">4</button>
+<button onclick="addToScore(5)">5</button>
+<button onclick="addToScore(6)">6</button>
+<button onclick="addToScore(7)">7</button>
+<button onclick="addToScore(8)">8</button>
+<button onclick="addToScore(9)">9</button>
+<button onclick="enterScore()">ENTER</button>
+
+<div>
+    <label>MIN: </label>
+    <span id="min-score">0</span>
+</div>
+
+<div>
+    <label>MAX: </label>
+    <span id="max-score">0</span>
+</div>
+
+<script>
+    let currentScore = '';
+
+    function addToScore(number) {
+        currentScore += number;
+        updateScoreBox();
+    }
+
+    function enterScore() {
+        let score = parseInt(currentScore, 10);
+
+        if (!isNaN(score)) {
+            updateMinMax(score);
+            resetScoreBox();
+        } else {
+            alert('Invalid score. Please enter a valid number.');
+        }
+    }
+
+    function updateMinMax(score) {
+        let minScore = parseInt(document.getElementById('min-score').innerText, 10);
+        let maxScore = parseInt(document.getElementById('max-score').innerText, 10);
+
+        if (score < minScore || minScore === 0) {
+            document.getElementById('min-score').innerText = score;
+        }
+
+        if (score > maxScore) {
+            document.getElementById('max-score').innerText = score;
+        }
+    }
+
+    function updateScoreBox() {
+        document.getElementById('score-box').innerText = currentScore;
+    }
+
+    function resetScoreBox() {
+        currentScore = '';
+        updateScoreBox();
+    }
+</script>
+
+</body>
+</html>
